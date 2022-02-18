@@ -1,9 +1,11 @@
 import React from 'react';
-import { NavBar, Icon } from 'antd-mobile';
+import { Toast } from 'antd-mobile';
 import { AutoSizer, List } from 'react-virtualized';
 import axios from 'axios';
 import './index.scss';
 import { getCurCity } from '../../utils/index.js';
+import NavHeader from '../../components/NavHeader';
+
 
 // 处理列表数据
 const formatCityData = (list) => {
@@ -23,6 +25,9 @@ const formatCityData = (list) => {
 const titleHeight = 36
 
 const nameHeight = 50
+
+// 有房源的城市
+const HOUSE_CITY = ['北京', '上海', '广州', '深圳']
 
 export default class CityList extends React.Component {
 
@@ -62,6 +67,19 @@ export default class CityList extends React.Component {
     return titleHeight + cityList[cityIndex[index]].length * nameHeight
   }
 
+  // 获取点击城市名称后切换城市的数据
+  async changeCity({ label, value }) {
+    // const res = await axios.get('http://localhost:8080/area/info')
+    if (HOUSE_CITY.indexOf(label) > -1) {
+      // 将获取到的数据再存到本地存储中，以字符串的形式，通过JSON.stringify()
+      localStorage.setItem('hkzf_city', JSON.stringify({ label, value }))
+      // 返回到上一页
+      this.props.history.go(-1)
+    } else {
+      { Toast.info('抱歉，该城市无房源信息', 1); }
+    }
+  }
+
   // 每一行的渲染
   rowRenderer = ({
     key,
@@ -76,7 +94,7 @@ export default class CityList extends React.Component {
       <div key={key} style={style} className='city'>
         <div className='title'>{letter === '#' ? '当前定位' : (letter === 'hot' ? '热门城市' : letter.toUpperCase())}</div>
         {
-          cityList[letter].map(item => <div className='name' key={item.value}>{item.label}</div>)
+          cityList[letter].map(item => <div className='name' key={item.value} onClick={() => this.changeCity(item)}>{item.label}</div>)
         }
       </div>
     )
@@ -118,12 +136,9 @@ export default class CityList extends React.Component {
   render() {
     return (
       <div className='citylist'>
-        <NavBar
-          mode="light"
-          icon={<Icon type="left" style={{ color: '#9c9fa1' }} />}
-          onLeftClick={() => this.props.history.go(-1)}
-          style={{ background: '#f6f5f6', color: '#9c9fa1' }}
-        >城市选择</NavBar>
+        <NavHeader>
+          城市选择
+        </NavHeader>
         {this.state.cityIndex.length ?
           <AutoSizer>
             {({ width, height }) => (

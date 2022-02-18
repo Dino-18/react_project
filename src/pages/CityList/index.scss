@@ -1,15 +1,9 @@
-#root {
-  .am-navbar {
-    margin-top: -45px;
-    .am-navbar-title {
-      color: #333;
-    }
-  }
-}
-
 .citylist {
   height: 100%;
   padding-top: 45px;
+  .am-navbar {
+    margin-top: -45px;
+  }
   .city {
     .title {
       font-size: 14px;

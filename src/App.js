@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import CityList from './pages/CityList';
 import Map from './pages/Map';
 
+// 房屋详情页面
+import HouseDetail from './pages/HouseDetail';
+
 
 function App() {
   return (
@@ -20,10 +23,13 @@ function App() {
       </ul> */}
 
       {/* 配置路由 */}
-      <Route path='/home' component={Home}></Route>
-      <Route path="/citylist" component={CityList}></Route>
+      <Route path='/home' component={Home} />
+      <Route path="/citylist" component={CityList} />
       <Route exact path="/" render={() => <Redirect to="/home" />} />
       <Route path="/map" component={Map} />
+
+      {/* 房源详情的路由规则 */}
+      <Route path="/detail/:id" component={HouseDetail} />
     </Router>
   );
 }
