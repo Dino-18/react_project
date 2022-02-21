@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { lazy } from 'react';
 // 导入路由
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // 导入子组件
-import News from '../News';
-import HouseList from '../HouseList';
 import Index from '../Index';
-import Profile from '../Profile';
 import { TabBar } from 'antd-mobile';
 import './index.css';
+
+const News = lazy(() => import('../News'))
+const HouseList = lazy(() => import('../HouseList'))
+const Profile = lazy(() => import('../Profile'))
 
 const tabItems = [
   {
