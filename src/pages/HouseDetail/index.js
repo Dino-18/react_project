@@ -151,7 +151,6 @@ export default class HouseDetail extends Component {
           text: '去登录',
           // 使用 replace 方法，解决登录后返回详情页面，再点击左上角返回按钮时
           // 需要点击两次的问题
-          // onPress: () => history.push('/login', { from: location })
           onPress: () => history.replace('/login', { from: location })
         }
       ])
@@ -212,8 +211,6 @@ export default class HouseDetail extends Component {
     })
 
     const { community, coord } = res.data.body
-
-    console.log(this.state.houseInfo)
 
     // 渲染地图
     this.renderMap(community, coord)

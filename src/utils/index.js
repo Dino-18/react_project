@@ -35,3 +35,8 @@ export const getCurCity = function () {
   // 若本地有数据则直接返回一个成功的Promise对象。
   return Promise.resolve(localCity);
 }
+
+export { API } from './api'
+export { BASE_URL } from './url'
+export * from './isAuth'
+export { getCity } from './city'

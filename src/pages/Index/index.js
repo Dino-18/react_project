@@ -15,9 +15,9 @@ const navs = [{
 }, {
   src: Nav2, title: '合租', path: '/home/list'
 }, {
-  src: Nav3, title: '地图找房'
+  src: Nav3, title: '地图找房', path: '/map'
 }, {
-  src: Nav4, title: '去出租'
+  src: Nav4, title: '去出租', path: '/rent/add'
 }]
 
 export default class Index extends React.Component {
@@ -111,7 +111,7 @@ export default class Index extends React.Component {
       this.state.news.map((item) =>
         <div className='home-news' key={item.id}>
           <div className='home-news-img'>
-            <img style={{ width: '120px' }} src={`http://localhost:8080${item.imgSrc}`}></img>
+            <img style={{ width: '120px' }} src={`http://localhost:8080${item.imgSrc}`} alt=''></img>
           </div>
           <div className='home-news-title'>
             <h2 style={{ fontSize: '15px' }}>{item.title}</h2>
